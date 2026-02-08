@@ -1,0 +1,126 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Fast + stable defaults (all ms)
+scan_timeout = 35
+command_timeout = 700
+add_newline = false
+
+palette = "catppuccin_mocha"
+
+# Left side: keep it minimal and readable
+format = "$os$username$directory$git_branch$git_status$character"
+
+# Right side: “info bar”
+right_format = "$c$rust$golang$nodejs$java$python$docker_context$cmd_duration$time"
+
+
+# ---------------- Modules (Left) ----------------
+
+[os]
+disabled = false
+style = "bold fg:sky"
+format = "[$symbol]($style) "
+
+[os.symbols]
+Arch = "󰣇"
+Linux = "󰌽"
+Windows = "󰍲"
+Macos = ""
+
+[username]
+show_always = false
+style_user = "bold fg:text"
+style_root = "bold fg:red"
+format = "[$user]($style) "
+
+[directory]
+style = "bold fg:peach"
+format = "[$path]($style) "
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+style = "bold fg:green"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "bold fg:green"
+format = "[$all_status$ahead_behind]($style) "
+
+[character]
+success_symbol = "[➜](bold fg:green) "
+error_symbol = "[➜](bold fg:red) "
+vimcmd_symbol = "[N](bold fg:lavender) "
+
+
+# ---------------- Modules (Right) ----------------
+
+[c]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[rust]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[golang]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[nodejs]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[java]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[python]
+symbol = " "
+style = "fg:teal"
+format = "[$symbol$version]($style) "
+
+[docker_context]
+symbol = " "
+style = "fg:blue"
+format = "[$symbol$context]($style) "
+
+[cmd_duration]
+min_time = 500
+style = "fg:yellow"
+format = "[took $duration]($style) "
+
+[time]
+disabled = false
+time_format = "%R"
+style = "fg:purple"
+format = "[ $time]($style)"
+
+
+# ---------------- Palette ----------------
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo  = "#f2cdcd"
+pink      = "#f5c2e7"
+mauve     = "#cba6f7"
+red       = "#f38ba8"
+maroon    = "#eba0ac"
+peach     = "#fab387"
+yellow    = "#f9e2af"
+green     = "#a6e3a1"
+teal      = "#94e2d5"
+sky       = "#89dceb"
+blue      = "#89b4fa"
+lavender  = "#b4befe"
+text      = "#cdd6f4"
+surface0  = "#313244"
+base      = "#1e1e2e"
+mantle    = "#181825"
+crust     = "#11111b"
+
