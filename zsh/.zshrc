@@ -72,3 +72,20 @@ if [[ -r "$HOME/.local/share/omarchy/default/bash/aliases" ]]; then
   source "$HOME/.local/share/omarchy/default/bash/aliases"
 fi
 
+# ---- Functions from ~/.config/shell-helper/functions (stowed) ----  
+FUNC_DIR="$XDG_CONFIG_HOME/shell-helper/functions"
+[ -r "$FUNC_DIR/source-all.sh" ] && . "$FUNC_DIR/source-all.sh" "$FUNC_DIR"
+
+# Load the aliases.zsh and aliases.local.zsh
+ALIAS_DIR="$XDG_CONFIG_HOME/zsh"
+ALIAS_FILE="$ALIAS_DIR/aliases.zsh"
+ALIAS_LOCAL_FILE="$ALIAS_DIR/aliases.local.zsh"
+
+# Create directory + files if missing (idempotent)
+[ -d "$ALIAS_DIR" ] || mkdir -p "$ALIAS_DIR"
+[ -f "$ALIAS_FILE" ] || : >"$ALIAS_FILE"
+[ -f "$ALIAS_LOCAL_FILE" ] || : >"$ALIAS_LOCAL_FILE"
+
+# Load them every shell start
+. "$ALIAS_FILE"
+. "$ALIAS_LOCAL_FILE"
