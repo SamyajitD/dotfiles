@@ -1,0 +1,1 @@
+/home/sd125/.config/omarchy/current/theme/neovim.lua
