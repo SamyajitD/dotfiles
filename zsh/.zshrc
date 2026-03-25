@@ -1,6 +1,11 @@
 # ---- Only run for interactive shells ----
 [[ -o interactive ]] || return
 
+# Put user binaries first (idempotent; no duplicates)
+typeset -U path PATH
+path=("$HOME/.local/bin" $path)
+export PATH
+
 # ---- XDG dirs (keep home clean + reproducible) ----
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
@@ -33,6 +38,21 @@ compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 # After compinit, before autosuggestions:
 if [[ -r "$XDG_CONFIG_HOME/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh" ]]; then
   source "$XDG_CONFIG_HOME/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+fi
+
+# --- zsh-expand (space expands aliases like fish) ---
+# Ctrl-Space bypasses expansion. Blacklist prevents expansion for specific aliases.
+export ZPWR_EXPAND_BLACKLIST=(g)        # example: don't expand alias "g"
+export ZPWR_EXPAND=true                 # expand aliases in first position
+export ZPWR_EXPAND_SECOND_POSITION=true # expand after sudo/env/etc
+export ZPWR_EXPAND_NATIVE=true          # also expand native stuff (globs, history, params)
+export ZPWR_CORRECT=false               # disable spelling correction (usually annoying)
+export ZPWR_CORRECT_EXPAND=false        # irrelevant if ZPWR_CORRECT=false
+export ZPWR_EXPAND_TO_HISTORY=false     # keep history clean (no forced expanded copies)
+
+ZSH_EXPAND_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins/zsh-expand"
+if [[ -r "$ZSH_EXPAND_DIR/zsh-expand.plugin.zsh" ]]; then
+  source "$ZSH_EXPAND_DIR/zsh-expand.plugin.zsh"
 fi
 
 # ---- zsh-autosuggestions ----
@@ -89,3 +109,15 @@ ALIAS_LOCAL_FILE="$ALIAS_DIR/aliases.local.zsh"
 # Load them every shell start
 . "$ALIAS_FILE"
 . "$ALIAS_LOCAL_FILE"
+
+# Mise activation
+eval "$(mise activate zsh)"
+
+# Ensure user scripts are available
+export PATH="$HOME/.local/bin:$PATH"
+
+# OMARCHY: ensure ~/.local/bin on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Allow tmux prefix C-s (disable terminal flow control / XON-XOFF)
+stty -ixon
