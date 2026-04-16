@@ -67,11 +67,9 @@ fi
 
 # ---- fzf integration (Arch packaged files) ----
 # Gives Ctrl-R history search and other keybindings/completion hooks.
-if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
-  source /usr/share/fzf/key-bindings.zsh
-fi
-if [[ -r /usr/share/fzf/completion.zsh ]]; then
-  source /usr/share/fzf/completion.zsh
+# Set up fzf key bindings and fuzzy completion
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
 fi
 
 # ---- zoxide (fast directory jumping) ----
