@@ -1,0 +1,28 @@
+[metadata]
+name = "projects"
+description = "Browse git repositories under ~/Projects"
+requirements = ["fd", "git", "eza"]
+
+[source]
+command = "fd -g .git -HL -t d ~/Projects --exec dirname '{}'"
+display = "{split:/:-1}"
+output = "{}"
+
+[preview]
+command = "eza --long --tree --level=3 --header --git --icons=always --color=always '{}'"
+shell = "bash"
+
+[keybindings]
+enter = "actions:cd"
+ctrl-e = "actions:edit"
+
+[actions.cd]
+description = "Open a shell in the selected repository"
+command = "cd '{}' && $SHELL"
+mode = "execute"
+
+[actions.edit]
+description = "Open the repository in Neovim"
+command = "nvim '{}'"
+shell = "bash"
+mode = "execute"

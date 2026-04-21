@@ -1,0 +1,36 @@
+[default_session]
+# startup_command = "nvim"
+preview_command = "eza -la {}"
+
+[[wildcard]]
+pattern = "~/Projects/personal/*"
+startup_command = "eza -la --icons --git --group-directories-first"
+preview_command = "git -C {} status --short --branch || eza -la --icons --git --group-directories-first"
+
+[[wildcard]]
+pattern = "~/Projects/work/*"
+startup_command = "nvim"
+preview_command = "git -C {} status --short --branch || eza -la --icons --git --group-directories-first"
+
+[[wildcard]]
+pattern = "~/Projects/cp/**"
+startup_command = "nvim"
+preview_command = "git -C {} status --short --branch || eza -la --icons --git --group-directories-first"
+
+[[session]]
+name = "dotfiles"
+path = "~/dotfiles"
+startup_command = "eza -la --icons --git --group-directories-first"
+preview_command = "eza -la --icons --git --group-directories-first ~/.config"
+
+[[session]]
+name = "downloads"
+path = "~/Downloads"
+startup_command = "yazi"
+preview_command = "eza -la --icons --git --group-directories-first ~/Downloads"
+
+[[session]]
+name = "CP"
+path = "~/Projects/cp/CP_Nvim"
+startup_command = "nvim"
+preview_command = "eza -la --icons --git --group-directories-first ~/Projects/cp/CP_Nvim"

@@ -8,3 +8,4 @@ alias fgshow='git log --graph --color=always --format="%C(auto)%h%d %s %C(black)
 alias fzb='fzf --preview '\''bat --color=always --style=numbers --line-range=:500 {}'\'''
 alias gc='git clone'
 alias v='nvim'
+alias scn='sesh connect "$(sesh list | fzf)"'

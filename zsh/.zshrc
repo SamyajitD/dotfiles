@@ -119,3 +119,5 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Allow tmux prefix C-s (disable terminal flow control / XON-XOFF)
 stty -ixon
+
+# eval "$(tv init zsh)"
